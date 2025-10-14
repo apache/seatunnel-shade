@@ -30,9 +30,34 @@
 
     <groupId>org.apache.seatunnel</groupId>
     <artifactId>seatunnel-shade</artifactId>
-    <version>2.3.12</version>
+    <version>2.3.12-SNAPSHOT</version>
     <packaging>pom</packaging>
     <name>SeaTunnel : Shade :</name>
+
+    <url>https://seatunnel.apache.org</url>
+    <inceptionYear>2025</inceptionYear>
+
+    <licenses>
+        <license>
+            <name>The Apache Software License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+
+    <scm>
+        <url>https://github.com/apache/seatunnel-shade</url>
+        <connection>git@github.com:apache/seatunnel-shade.git</connection>
+    </scm>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <!-- Allows exec-maven-plugin to resolve snapshot plugin dependencies -->
+            <id>apache.snapshots.https</id>
+            <name>${distMgmtSnapshotsName}</name>
+            <url>${distMgmtSnapshotsUrl}</url>
+        </pluginRepository>
+    </pluginRepositories>
 
     <modules>
         <module>seatunnel-shade-hazelcast</module>
@@ -50,7 +75,6 @@
     </modules>
 
     <properties>
-        <revision>2.3.12</revision>
         <e2e.dependency.skip>true</e2e.dependency.skip>
         <java.version>1.8</java.version>
         <spotless.version>2.29.0</spotless.version>
@@ -177,6 +201,42 @@
 
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.4</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-enforcer-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>enforce-maven</id>
+                        <goals>
+                            <goal>enforce</goal>
+                        </goals>
+                        <configuration>
+                            <rules>
+                                <requireJavaVersion>
+                                    <version>1.8.0</version>
+                                </requireJavaVersion>
+                                <requireMavenVersion>
+                                    <version>[3.1.1,)</version>
+                                </requireMavenVersion>
+                            </rules>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>com.diffplug.spotless</groupId>
                 <artifactId>spotless-maven-plugin</artifactId>
                 <version>${spotless.version}</version>
@@ -283,17 +343,5 @@
             </plugin>
         </plugins>
     </build>
-
-    <url>https://seatunnel.apache.org</url>
-    <inceptionYear>2025</inceptionYear>
-
-    <pluginRepositories>
-        <pluginRepository>
-            <!-- Allows exec-maven-plugin to resolve snapshot plugin dependencies -->
-            <id>apache.snapshots.https</id>
-            <name>${distMgmtSnapshotsName}</name>
-            <url>${distMgmtSnapshotsUrl}</url>
-        </pluginRepository>
-    </pluginRepositories>
 
 </project>
