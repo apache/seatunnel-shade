@@ -40,6 +40,8 @@ header:
     - '**/LICENSE'
     - '**/NOTICE'
     - '**/.gitkeep'
-    - '**/com/typesafe/config/**'
+    - 'seatunnel-shade/seatunnel-shade-hazelcast/src/main/java/com/hazelcast/**'
+    - 'README.md'
+
 
   comment: on-failure
