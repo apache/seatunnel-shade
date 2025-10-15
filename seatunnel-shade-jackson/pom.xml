@@ -23,12 +23,12 @@
     <parent>
         <groupId>org.apache.seatunnel</groupId>
         <artifactId>seatunnel-shade</artifactId>
-        <version>2.3.13-SNAPSHOT</version>
+        <version>2.3.13</version>
     </parent>
 
     <artifactId>seatunnel-shade-jackson</artifactId>
 
-    <version>${jackson.version}-2.3.13-SNAPSHOT</version>
+    <version>${jackson.version}-2.3.13</version>
     <name>SeaTunnel : Shade : Jackson</name>
 
     <dependencies>
