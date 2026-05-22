@@ -23,11 +23,11 @@
     <parent>
         <groupId>org.apache.seatunnel</groupId>
         <artifactId>seatunnel-shade</artifactId>
-        <version>2.3.13-SNAPSHOT</version>
+        <version>3.0.0</version>
     </parent>
 
     <artifactId>seatunnel-shade-guava</artifactId>
-    <version>${guava.version}-2.3.13-SNAPSHOT</version>
+    <version>${guava.version}-${seatunnel.shade.version}</version>
     <name>SeaTunnel : Shade : Guava</name>
 
     <dependencies>
