@@ -88,7 +88,7 @@
         <maven-scm-provider-jgit.version>1.9.5</maven-scm-provider-jgit.version>
         <seatunnel.shade.package>org.apache.seatunnel.shade</seatunnel.shade.package>
         <seatunnel.shade.version>3.0.0</seatunnel.shade.version>
-        <jackson.version>2.13.3</jackson.version>
+        <jackson.version>2.22.0</jackson.version>
         <arrow.version>15.0.1</arrow.version>
         <enableSourceJarCreation>true</enableSourceJarCreation>
         <!--  SeaTunnel Engine use     -->
