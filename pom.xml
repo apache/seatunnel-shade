@@ -72,6 +72,7 @@
         <module>seatunnel-shade-scala-compiler</module>
         <module>seatunnel-shade-jetty</module>
         <module>seatunnel-shade-commons-lang3</module>
+        <module>seatunnel-shade-calcite</module>
     </modules>
 
     <properties>
@@ -98,10 +99,11 @@
         <hikari.version>4.0.3</hikari.version>
         <jetty.version>9.4.56.v20240826</jetty.version>
         <thrift-service.version>1.0.0</thrift-service.version>
-        <janino.verion>3.0.11</janino.verion>
-        <scala.version>2.13.11</scala.version>
-        <scala.binary.version>2.13</scala.binary.version>
+        <janino.verion>3.1.12</janino.verion>
+        <scala.version>2.12.15</scala.version>
+        <scala.binary.version>2.12</scala.binary.version>
         <commons-lang3.version>3.18.0</commons-lang3.version>
+        <calcite.version>1.38.0</calcite.version>
     </properties>
 
     <dependencyManagement>
