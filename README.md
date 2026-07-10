@@ -10,7 +10,7 @@ Each module wraps a single third-party library, relocating its packages under `o
 |--------|---------|---------|
 | `seatunnel-shade-hazelcast` | Hazelcast | 5.1 |
 | `seatunnel-shade-hadoop3-uber` | Hadoop Client | 3.1.4 |
-| `seatunnel-shade-jackson` | Jackson | 2.13.3 |
+| `seatunnel-shade-jackson` | Jackson | 2.15.4 |
 | `seatunnel-shade-guava` | Guava | 27.0-jre |
 | `seatunnel-shade-hadoop-aws` | Hadoop AWS | 3.1.4 |
 | `seatunnel-shade-arrow` | Apache Arrow | 15.0.1 |
