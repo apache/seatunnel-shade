@@ -1,0 +1,59 @@
+Apache SeaTunnel Shade 3.0.0 Release Notes
+
+Overview
+--------
+Apache SeaTunnel Shade 3.0.0 is a major release that introduces new shaded modules
+and updates existing library versions for better compatibility with Apache SeaTunnel.
+
+New Features
+------------
+- Add new seatunnel-shade-calcite module (Apache Calcite 1.38.0)
+- Add new seatunnel-shade-commons-lang3 module (Commons Lang3 3.18.0)
+- Add new seatunnel-shade-jackson-yaml module (jackson 2.15.4)
+
+Improvements
+------------
+- Upgrade janino from 3.0.11 to 3.1.12
+- Align scala-compiler version with Spark 2.12.15
+- Upgrade jackson from 2.13.3 to 2.15.4
+
+Module Updates
+--------------
+| Module                       | Previous Version | New Version |
+|------------------------------|------------------|-------------|
+| seatunnel-shade-hazelcast    | 5.1              | 5.1         |
+| seatunnel-shade-hadoop3-uber | 3.1.4            | 3.1.4       |
+| seatunnel-shade-jackson      | 2.13.3           | 2.15.4      |
+| seatunnel-shade-guava        | 27.0-jre         | 27.0-jre    |
+| seatunnel-shade-hadoop-aws   | 3.1.4            | 3.1.4       |
+| seatunnel-shade-arrow        | 15.0.1           | 15.0.1      |
+| seatunnel-shade-hikari       | 4.0.3            | 4.0.3       |
+| seatunnel-shade-thrift-service | 1.0.0          | 1.0.0       |
+| seatunnel-shade-janino       | 3.0.11           | 3.1.12      |
+| seatunnel-shade-scala-compiler | 2.13.11         | 2.12.15     |
+| seatunnel-shade-jetty        | 9.4.56           | 9.4.56      |
+| seatunnel-shade-commons-lang3| N/A              | 3.18.0      |
+| seatunnel-shade-calcite      | N/A              | 1.38.0      |
+
+Migration Notes
+---------------
+- This release maintains API compatibility with previous versions
+- Users upgrading from 2.3.x should update their dependency versions
+- The seatunnel.shade.version property should be set to 3.0.0
+
+Bug Fixes
+---------
+- N/A (initial 3.0.0 release)
+
+Known Issues
+-----------
+- N/A
+
+Dependencies
+-------------
+For full dependency details, please refer to each module's pom.xml.
+
+Thanks
+------
+Thank you to all contributors who made this release possible:
+- @zhangdonghao
