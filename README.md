@@ -70,9 +70,52 @@ mvn -B -DskipTests -Drat.skip=true \
 
 **Key points**:
 
-- Module versions follow `${library.version}-${seatunnel.shade.version}` (e.g. `1.38.0-3.0.0`). As long as the library version changes, there is no conflict with published artifacts.
+- **First release (all modules)**: Set `seatunnel.shade.version` in root `pom.xml` and use `${library.version}-${seatunnel.shade.version}` for all module versions. Root POM `<version>` must be the actual release version (e.g. `3.0.0`, not `${revision}`), otherwise Nexus will reject the deployment.
+- **Incremental release (partial modules)**: After the parent POM is released, its `<properties>` cannot be updated in a new release. Override the library version in the child module's own `<properties>` block, then use the same `${lib.version}-${seatunnel.shade.version}` expression — it will resolve to the child's property value, not the parent's. The version string must differ from already-published artifacts to avoid a Nexus 400 conflict.
 - **Never** run `mvn clean deploy` without `-pl` — unchanged modules will be redeployed, and Nexus will reject them with a 400 error.
 - If only the shade plugin configuration changed (not the library version), you must bump the version manually before deploying.
+
+**Background**: The shade project must release before its consumers (e.g. `apache/seatunnel`) can build. Once `seatunnel-shade:3.0.0` is published, its POM properties are frozen. A child module that continues referencing the parent's property will resolve to the old value, since the parent's `<properties>` cannot be updated in an incremental release. The fix is to declare the updated property in the child module's own `<properties>` block — Maven child properties override parent properties, so the same version expression produces the new value.
+
+**Incremental release example** (upgrading janino `3.0.11` → `3.1.12`):
+
+Parent `pom.xml` (already released, cannot be changed):
+```xml
+<janino.verion>3.0.11</janino.verion>
+```
+
+Child `seatunnel-shade-janino/pom.xml` **before** incremental release:
+```xml
+<parent>
+    <groupId>org.apache.seatunnel</groupId>
+    <artifactId>seatunnel-shade</artifactId>
+    <version>3.0.0</version>
+</parent>
+
+<artifactId>seatunnel-shade-janino</artifactId>
+<version>${janino.verion}-${seatunnel.shade.version}</version>
+```
+
+Child `seatunnel-shade-janino/pom.xml` **after** incremental release:
+```xml
+<parent>
+    <groupId>org.apache.seatunnel</groupId>
+    <artifactId>seatunnel-shade</artifactId>
+    <version>3.0.0</version>
+</parent>
+
+<properties>
+    <janino.verion>3.1.12</janino.verion>   <!-- overrides parent's property -->
+</properties>
+
+<artifactId>seatunnel-shade-janino</artifactId>
+<version>${janino.verion}-${seatunnel.shade.version}</version>   <!-- resolves to 3.1.12-3.0.0 -->
+```
+
+Deploy with `-pl` to avoid touching unchanged modules:
+```bash
+mvn -B -DskipTests -Drat.skip=true -pl seatunnel-shade-janino clean deploy
+```
 
 ### Tagging
 

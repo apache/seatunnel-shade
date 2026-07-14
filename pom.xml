@@ -101,6 +101,7 @@
         <thrift-service.version>1.0.0</thrift-service.version>
         <janino.verion>3.1.12</janino.verion>
         <scala.version>2.12.15</scala.version>
+        <scala-compiler.version>2.12</scala-compiler.version>
         <scala.binary.version>2.12</scala.binary.version>
         <commons-lang3.version>3.18.0</commons-lang3.version>
         <calcite.version>1.38.0</calcite.version>

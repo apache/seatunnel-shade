@@ -27,8 +27,13 @@
         <version>3.0.0</version>
     </parent>
 
+    <properties>
+        <scala.version>2.12.15</scala.version>
+        <scala-compiler.version>2.12</scala-compiler.version>
+    </properties>
+
     <artifactId>seatunnel-shade-scala-compiler</artifactId>
-    <version>${scala.version}-${seatunnel.shade.version}</version>
+    <version>${scala-compiler.version}-${seatunnel.shade.version}</version>
     <name>SeaTunnel : Shade : Scala</name>
 
     <dependencies>
