@@ -29,7 +29,7 @@
     <dependencies>
         <!--
             Jackson YAML is isolated from downstream dependency graphs. The shaded artifact uses
-            the relocated Jackson classes supplied by seatunnel-jackson at runtime.
+            the relocated Jackson classes supplied by seatunnel-sahde-jackson at runtime.
         -->
         <dependency>
             <groupId>org.apache.seatunnel</groupId>
@@ -40,7 +40,6 @@
             <groupId>com.fasterxml.jackson.dataformat</groupId>
             <artifactId>jackson-dataformat-yaml</artifactId>
             <version>${jackson.version}</version>
-            <optional>true</optional>
             <exclusions>
                 <exclusion>
                     <groupId>com.fasterxml.jackson.core</groupId>
@@ -70,9 +69,6 @@
                         </goals>
                         <phase>package</phase>
                         <configuration>
-                            <finalName>seatunnel-jackson-yaml</finalName>
-                            <createSourcesJar>${enableSourceJarCreation}</createSourcesJar>
-                            <shadeSourcesContent>true</shadeSourcesContent>
                             <shadedArtifactAttached>false</shadedArtifactAttached>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <filters>
