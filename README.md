@@ -6,21 +6,22 @@ Each module wraps a single third-party library, relocating its packages under `o
 
 ## Modules
 
-| Module | Library | Version |
-|--------|---------|---------|
-| `seatunnel-shade-hazelcast` | Hazelcast | 5.1 |
-| `seatunnel-shade-hadoop3-uber` | Hadoop Client | 3.1.4 |
-| `seatunnel-shade-jackson` | Jackson | 2.15.4 |
-| `seatunnel-shade-guava` | Guava | 27.0-jre |
-| `seatunnel-shade-hadoop-aws` | Hadoop AWS | 3.1.4 |
-| `seatunnel-shade-arrow` | Apache Arrow | 15.0.1 |
-| `seatunnel-shade-hikari` | HikariCP | 4.0.3 |
+| Module                           | Library | Version |
+|----------------------------------|---------|---------|
+| `seatunnel-shade-hazelcast`      | Hazelcast | 5.1 |
+| `seatunnel-shade-hadoop3-uber`   | Hadoop Client | 3.1.4 |
+| `seatunnel-shade-jackson`        | Jackson | 2.15.4 |
+| `seatunnel-shade-guava`          | Guava | 27.0-jre |
+| `seatunnel-shade-hadoop-aws`     | Hadoop AWS | 3.1.4 |
+| `seatunnel-shade-arrow`          | Apache Arrow | 15.0.1 |
+| `seatunnel-shade-hikari`         | HikariCP | 4.0.3 |
 | `seatunnel-shade-thrift-service` | Apache Doris Thrift | 1.0.0 |
-| `seatunnel-shade-janino` | Janino | 3.1.12 |
+| `seatunnel-shade-janino`         | Janino | 3.1.12 |
 | `seatunnel-shade-scala-compiler` | Scala Compiler | 2.12.15 |
-| `seatunnel-shade-jetty` | Jetty | 9.4.56 |
-| `seatunnel-shade-commons-lang3` | Commons Lang3 | 3.18.0 |
-| `seatunnel-shade-calcite` | Apache Calcite | 1.38.0 |
+| `seatunnel-shade-jetty`          | Jetty | 9.4.56 |
+| `seatunnel-shade-commons-lang3`  | Commons Lang3 | 3.18.0 |
+| `seatunnel-shade-calcite`        | Apache Calcite | 1.38.0 |
+| `seatunnel-shade-jackson-yaml`   | Jackson | 2.15.4 |
 
 ## Build
 

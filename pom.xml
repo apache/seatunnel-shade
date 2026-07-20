@@ -73,6 +73,7 @@
         <module>seatunnel-shade-jetty</module>
         <module>seatunnel-shade-commons-lang3</module>
         <module>seatunnel-shade-calcite</module>
+        <module>seatunnel-shade-jackson-yaml</module>
     </modules>
 
     <properties>
