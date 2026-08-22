@@ -9,10 +9,10 @@ Each module wraps a single third-party library, relocating its packages under `o
 | Module                           | Library | Version |
 |----------------------------------|---------|---------|
 | `seatunnel-shade-hazelcast`      | Hazelcast | 5.1 |
-| `seatunnel-shade-hadoop3-uber`   | Hadoop Client | 3.1.4 |
+| `seatunnel-shade-hadoop3-uber`   | Hadoop Client | 3.4.3 |
 | `seatunnel-shade-jackson`        | Jackson | 2.15.4 |
 | `seatunnel-shade-guava`          | Guava | 27.0-jre |
-| `seatunnel-shade-hadoop-aws`     | Hadoop AWS | 3.1.4 |
+| `seatunnel-shade-hadoop-aws`     | Hadoop AWS | 3.4.3 |
 | `seatunnel-shade-arrow`          | Apache Arrow | 15.0.1 |
 | `seatunnel-shade-hikari`         | HikariCP | 4.0.3 |
 | `seatunnel-shade-thrift-service` | Apache Doris Thrift | 1.0.0 |
