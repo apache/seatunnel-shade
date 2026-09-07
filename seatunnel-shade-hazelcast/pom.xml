@@ -32,6 +32,10 @@
     <packaging>jar</packaging>
     <name>SeaTunnel : Shade : Hazelcast</name>
 
+    <properties>
+        <hazelcast.version>5.3.5</hazelcast.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>com.hazelcast</groupId>
