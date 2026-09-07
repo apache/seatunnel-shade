@@ -22,8 +22,10 @@ import com.hazelcast.cluster.ClusterState;
 import com.hazelcast.cluster.Member;
 import com.hazelcast.cluster.MembershipEvent;
 import com.hazelcast.cluster.impl.MemberImpl;
+import com.hazelcast.cp.internal.RaftService;
 import com.hazelcast.instance.EndpointQualifier;
 import com.hazelcast.instance.impl.Node;
+import com.hazelcast.internal.cluster.Joiner;
 import com.hazelcast.internal.cluster.MemberInfo;
 import com.hazelcast.internal.cluster.impl.operations.FetchMembersViewOp;
 import com.hazelcast.internal.cluster.impl.operations.MembersUpdateOp;
@@ -399,6 +401,7 @@ public class MembershipManager {
         }
 
         for (MemberImpl member : removedMembers) {
+            clusterService.getClusterJoinManager().addLeftMember(member);
             closeConnections(member.getAddress(), "Member left event received from master");
             handleMemberRemove(memberMapRef.get(), member);
         }
@@ -408,6 +411,7 @@ public class MembershipManager {
                 currentMemberMap.getMembers(), addedMembers, !clusterService.isJoined());
 
         removeFromMissingMembers(members);
+        removeFromCPMissingMembers(membersView);
 
         clusterHeartbeatManager.heartbeat();
         clusterService.printMemberList();
@@ -917,6 +921,12 @@ public class MembershipManager {
             nodeEngine.onMemberLeft(deadMember);
         }
         node.getNodeExtension().onMemberListChange();
+        Joiner joiner = node.getJoiner();
+        if (joiner != null && joiner.getClass() == TcpIpJoiner.class) {
+            for (MemberImpl deadMember : deadMembers) {
+                ((TcpIpJoiner) joiner).onMemberRemoved(deadMember);
+            }
+        }
     }
 
     void sendMembershipEvents(
@@ -929,6 +939,10 @@ public class MembershipManager {
                 // sync calls
                 node.getPartitionService().memberAdded(newMember);
                 node.getNodeExtension().onMemberListChange();
+                Joiner joiner = node.getJoiner();
+                if (joiner != null && joiner.getClass() == TcpIpJoiner.class) {
+                    ((TcpIpJoiner) joiner).onMemberAdded(newMember);
+                }
 
                 // async events
                 eventMembers.add(newMember);
@@ -1257,6 +1271,12 @@ public class MembershipManager {
             }
         }
         missingMembersRef.set(unmodifiableMap(m));
+    }
+
+    private void removeFromCPMissingMembers(MembersView membersView) {
+        RaftService raftService = nodeEngine.getService(RaftService.SERVICE_NAME);
+        List<MemberInfo> membersInfo = membersView.getMembers();
+        raftService.removeFromMissingMembers(membersInfo);
     }
 
     private boolean isHotRestartEnabled() {
