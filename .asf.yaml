@@ -41,9 +41,22 @@ github:
         dismiss_stale_reviews: true
         required_approving_review_count: 2
 
+  rulesets:
+    - name: "Default Branch Protection"
+      type: branch
+      branches:
+        includes:
+          - "~DEFAULT_BRANCH"
+          - "release/*"
+          - "rel/*"
+        excludes: []
+      bypass_teams:
+        - root
+      restrict_deletion: true
+      restrict_force_push: true
 notifications:
-  commits:      commits@seatunnel.apache.org
-  issues:       commits@seatunnel.apache.org
+  commits: commits@seatunnel.apache.org
+  issues: commits@seatunnel.apache.org
   pullrequests: commits@seatunnel.apache.org
-  pullrequests_status:  commits@seatunnel.apache.org
+  pullrequests_status: commits@seatunnel.apache.org
   pullrequests_comment: commits@seatunnel.apache.org
