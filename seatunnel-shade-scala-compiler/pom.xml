@@ -24,7 +24,7 @@
     <parent>
         <groupId>org.apache.seatunnel</groupId>
         <artifactId>seatunnel-shade</artifactId>
-        <version>3.0.1</version>
+        <version>${revision}</version>
     </parent>
 
     <properties>

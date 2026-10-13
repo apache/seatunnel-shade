@@ -30,7 +30,7 @@
 
     <groupId>org.apache.seatunnel</groupId>
     <artifactId>seatunnel-shade</artifactId>
-    <version>3.0.1</version>
+    <version>${revision}</version>
     <packaging>pom</packaging>
     <name>SeaTunnel : Shade :</name>
 
@@ -77,6 +77,8 @@
     </modules>
 
     <properties>
+        <revision>3.0.1-SNAPSHOT</revision>
+        <seatunnel.shade.version>${revision}</seatunnel.shade.version>
         <e2e.dependency.skip>true</e2e.dependency.skip>
         <java.version>1.8</java.version>
         <spotless.version>2.29.0</spotless.version>
@@ -88,7 +90,6 @@
         <maven-dependency-plugin.version>3.1.1</maven-dependency-plugin.version>
         <maven-scm-provider-jgit.version>1.9.5</maven-scm-provider-jgit.version>
         <seatunnel.shade.package>org.apache.seatunnel.shade</seatunnel.shade.package>
-        <seatunnel.shade.version>3.0.1</seatunnel.shade.version>
         <jackson.version>2.15.4</jackson.version>
         <arrow.version>15.0.1</arrow.version>
         <enableSourceJarCreation>true</enableSourceJarCreation>
