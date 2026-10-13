@@ -88,7 +88,7 @@
         <maven.compiler.target>${java.version}</maven.compiler.target>
         <maven-shade-plugin.version>3.3.0</maven-shade-plugin.version>
         <maven-dependency-plugin.version>3.1.1</maven-dependency-plugin.version>
-        <maven-scm-provider-jgit.version>1.9.5</maven-scm-provider-jgit.version>
+        <maven-scm-provider-jgit.version>2.0.0</maven-scm-provider-jgit.version>
         <seatunnel.shade.package>org.apache.seatunnel.shade</seatunnel.shade.package>
         <jackson.version>2.15.4</jackson.version>
         <arrow.version>15.0.1</arrow.version>
@@ -333,6 +333,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
+                <version>3.0.1</version>
                 <configuration>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                     <tagNameFormat>@{project.version}</tagNameFormat>
