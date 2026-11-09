@@ -30,6 +30,12 @@
     <version>${hadoop3.version}-${seatunnel.shade.version}</version>
     <name>SeaTunnel : Shade : Hadoop3 Uber</name>
 
+    <properties>
+        <seatunnel.shade.version>3.0.1</seatunnel.shade.version>
+        <!-- The published 3.0.0 parent POM still defines Jackson 2.13.3. -->
+        <jackson.version>2.15.4</jackson.version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
