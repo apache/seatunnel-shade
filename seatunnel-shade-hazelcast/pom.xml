@@ -123,6 +123,7 @@
                             <excludes>
                                 <exclude>META-INF/MANIFEST.MF</exclude>
                                 <exclude>META-INF/THIRD-PARTY.txt</exclude>
+                                <exclude>THIRD-PARTY.txt</exclude>
                                 <exclude>com/hazelcast/internal/cluster/impl/MembershipManager.class</exclude>
                                 <exclude>com/hazelcast/internal/cluster/impl/MemberMap.class</exclude>
                                 <exclude>com/hazelcast/internal/cluster/impl/ClusterServiceImpl.class</exclude>
