@@ -1,0 +1,70 @@
+Apache SeaTunnel Shade 3.0.1 Release Notes
+
+Overview
+--------
+Apache SeaTunnel Shade 3.0.1 upgrades Hazelcast to 5.1.7 and corrects the
+Jackson version bundled in the Hadoop3 Uber JAR.
+
+New Features
+------------
+- N/A
+
+Improvements
+------------
+- Upgrade Hazelcast from 5.1 to 5.1.7, replacing the bundled JSON-java
+  20201115 with the public-domain 20230227 release.
+- Update the Hazelcast third-party notices and preserve the bundled
+  JSON-java version metadata.
+- Include the SeaTunnel patches and updated third-party notices in the
+  Hazelcast source JAR.
+
+Module Updates
+--------------
+The table shows the bundled library versions. All 14 modules move from
+the 3.0.0 Shade version suffix to 3.0.1.
+
+| Module                         | Previous Version | New Version      |
+|--------------------------------|------------------|------------------|
+| seatunnel-shade-hazelcast      | 5.1              | 5.1.7            |
+| seatunnel-shade-hadoop3-uber   | 3.1.4            | 3.1.4            |
+| seatunnel-shade-jackson        | 2.15.4           | 2.15.4           |
+| seatunnel-shade-guava          | 27.0-jre         | 27.0-jre         |
+| seatunnel-shade-hadoop-aws     | 3.1.4            | 3.1.4            |
+| seatunnel-shade-arrow          | 15.0.1           | 15.0.1           |
+| seatunnel-shade-hikari         | 4.0.3            | 4.0.3            |
+| seatunnel-shade-thrift-service | 1.0.0            | 1.0.0            |
+| seatunnel-shade-janino         | 3.1.12           | 3.1.12           |
+| seatunnel-shade-scala-compiler | 2.12.15          | 2.12.15          |
+| seatunnel-shade-jetty          | 9.4.56.v20240826 | 9.4.56.v20240826 |
+| seatunnel-shade-commons-lang3  | 3.18.0           | 3.18.0           |
+| seatunnel-shade-calcite        | 1.38.0           | 1.38.0           |
+| seatunnel-shade-jackson-yaml   | 2.15.4           | 2.15.4           |
+
+Migration Notes
+---------------
+- To upgrade all Shade dependencies from 3.0.0, set seatunnel.shade.version
+  to 3.0.1 and update the Hazelcast library version to 5.1.7.
+- If you pin the affected artifacts directly, use these Maven coordinates:
+  - org.apache.seatunnel:seatunnel-shade-hazelcast:5.1.7-3.0.1
+  - org.apache.seatunnel:seatunnel-shade-hadoop3-uber:3.1.4-3.0.1
+
+Bug Fixes
+---------
+- Bundle relocated Jackson Core and Databind 2.15.4 in Hadoop3 Uber to
+  match the Shade source build. The 3.0.0 artifact on Maven Central
+  contained 2.13.3.
+- Restore tracking of departed member UUIDs in SeaTunnel's patched
+  Hazelcast MembershipManager.
+
+Known Issues
+------------
+- N/A
+
+Dependencies
+------------
+See each module's pom.xml for its dependencies.
+
+Thanks
+------
+Thanks to everyone who contributed to this release.
+- @nzw921rx
