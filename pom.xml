@@ -46,8 +46,10 @@
     </licenses>
 
     <scm>
+        <connection>scm:git:https://github.com/apache/seatunnel-shade.git</connection>
+        <developerConnection>scm:git:https://github.com/apache/seatunnel-shade.git</developerConnection>
         <url>https://github.com/apache/seatunnel-shade</url>
-        <connection>git@github.com:apache/seatunnel-shade.git</connection>
+        <tag>HEAD</tag>
     </scm>
 
     <pluginRepositories>
@@ -189,6 +191,7 @@
                                 <!-- By default, the resulting pom is written into the modules base directory to work around MNG-6405.
                                     We aren't affected, so we use the proper location. -->
                                 <outputDirectory>${project.build.directory}</outputDirectory>
+                                <updatePomFile>true</updatePomFile>
                             </configuration>
                         </execution>
                         <execution>
@@ -345,6 +348,10 @@
                         <version>${maven-scm-provider-jgit.version}</version>
                     </dependency>
                 </dependencies>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>flatten-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
