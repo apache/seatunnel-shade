@@ -924,7 +924,7 @@ public class ClusterServiceImpl
         changeClusterState(newState, false);
     }
 
-    private void changeClusterState(ClusterState newState, boolean isTransient) {
+    public void changeClusterState(ClusterState newState, boolean isTransient) {
         long partitionStateStamp = getPartitionStateStamp();
         clusterStateManager.changeClusterState(
                 ClusterStateChange.from(newState),

@@ -8,7 +8,7 @@ Each module wraps a single third-party library, relocating its packages under `o
 
 | Module                           | Library | Version |
 |----------------------------------|---------|---------|
-| `seatunnel-shade-hazelcast`      | Hazelcast | 5.1 |
+| `seatunnel-shade-hazelcast`      | Hazelcast | 5.3.5 |
 | `seatunnel-shade-hadoop3-uber`   | Hadoop Client | 3.1.4 |
 | `seatunnel-shade-jackson`        | Jackson | 2.15.4 |
 | `seatunnel-shade-guava`          | Guava | 27.0-jre |
