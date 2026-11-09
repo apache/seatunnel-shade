@@ -18,7 +18,7 @@ Each module wraps a single third-party library, relocating its packages under `o
 | `seatunnel-shade-thrift-service` | Apache Doris Thrift | 1.0.0 |
 | `seatunnel-shade-janino`         | Janino | 3.1.12 |
 | `seatunnel-shade-scala-compiler` | Scala Compiler | 2.12.15 |
-| `seatunnel-shade-jetty`          | Jetty | 9.4.56 |
+| `seatunnel-shade-jetty`          | Jetty | 9.4.58 |
 | `seatunnel-shade-commons-lang3`  | Commons Lang3 | 3.18.0 |
 | `seatunnel-shade-calcite`        | Apache Calcite | 1.38.0 |
 | `seatunnel-shade-jackson-yaml`   | Jackson | 2.15.4 |

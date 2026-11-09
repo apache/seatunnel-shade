@@ -30,6 +30,10 @@
     <version>${jetty.version}-${seatunnel.shade.version}</version>
     <name>SeaTunnel : Shade : Jetty</name>
 
+    <properties>
+        <jetty.version>9.4.58.v20250814</jetty.version>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.eclipse.jetty</groupId>
