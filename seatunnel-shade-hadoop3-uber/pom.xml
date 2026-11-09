@@ -26,6 +26,16 @@
         <version>3.0.0</version>
     </parent>
 
+    <properties>
+        <!--
+            Overrides the parent's hadoop3.version for this module only. The parent pom is already
+            published at 3.0.0 and its properties are frozen, so an incremental release has to
+            declare the new library version here - see "Incremental release" in README.md. The
+            artifact version therefore resolves to 3.4.3-3.0.0.
+        -->
+        <hadoop3.version>3.4.3</hadoop3.version>
+    </properties>
+
     <artifactId>seatunnel-shade-hadoop3-uber</artifactId>
     <version>${hadoop3.version}-${seatunnel.shade.version}</version>
     <name>SeaTunnel : Shade : Hadoop3 Uber</name>
@@ -46,6 +56,24 @@
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
             <version>${hadoop3.version}</version>
+            <exclusions>
+                <!--
+                    Hadoop's own "No slf4j backends for downstream clients" exclusion list in
+                    hadoop-client still names only slf4j-log4j12; it was never updated after
+                    HADOOP-18088 switched the backend to slf4j-reload4j in 3.3.3+. This project
+                    manages no SLF4J binding of its own, so without these the binding would be
+                    pulled in and packaged. The jar-level org/slf4j/impl/** filter below is the
+                    second half of the same guard.
+                -->
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-reload4j</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.slf4j</groupId>
+                    <artifactId>slf4j-log4j12</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>
@@ -75,6 +103,30 @@
                                         <exclude>META-INF/*.DSA</exclude>
                                         <exclude>META-INF/*.RSA</exclude>
                                         <exclude>META-INF/versions/21/**</exclude>
+                                        <!--
+                                            DO NOT REMOVE. Keeps this jar free of any SLF4J binding,
+                                            so seatunnel-starter.jar's log4j2 binding stays the only
+                                            one on the runtime classpath.
+
+                                            Hadoop 3.3.3+ pulls org.slf4j:slf4j-reload4j
+                                            (org/slf4j/impl/**) through hadoop-common. Were that
+                                            packaged here, SLF4J would bind to log4j 1.x instead of
+                                            log4j2. Nothing configures log4j 1.x, so its root logger
+                                            stays at the default DEBUG level; Parquet then wraps its
+                                            record consumer in RecordConsumerLoggingWrapper - it does
+                                            that only when isDebugEnabled() - and logs once per field
+                                            per row through Category.callAppenders, which takes a
+                                            monitor on every Category up to the shared root. Every
+                                            Parquet writer thread in the JVM serialises on it, even
+                                            with no appender attached.
+
+                                            Only the binding is excluded, never the SLF4J API: this
+                                            pattern must stay org/slf4j/impl/**, not org/slf4j/**.
+                                            Filtered by class path as well as by the hadoop-client
+                                            exclusions above, so a binding reaching this jar through
+                                            some other dependency is still dropped.
+                                        -->
+                                        <exclude>org/slf4j/impl/**</exclude>
                                     </excludes>
                                 </filter>
                             </filters>
