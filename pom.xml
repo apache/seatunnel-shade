@@ -93,7 +93,7 @@
         <arrow.version>15.0.1</arrow.version>
         <enableSourceJarCreation>true</enableSourceJarCreation>
         <!--  SeaTunnel Engine use     -->
-        <hazelcast.version>5.1</hazelcast.version>
+        <hazelcast.version>5.1.7</hazelcast.version>
         <hadoop-aws.version>3.1.4</hadoop-aws.version>
         <hadoop3.version>3.1.4</hadoop3.version>
         <guava.version>27.0-jre</guava.version>
