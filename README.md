@@ -8,7 +8,7 @@ Each module wraps a single third-party library, relocating its packages under `o
 
 | Module                           | Library | Version |
 |----------------------------------|---------|---------|
-| `seatunnel-shade-hazelcast`      | Hazelcast | 5.1 |
+| `seatunnel-shade-hazelcast`      | Hazelcast | 5.1.7 |
 | `seatunnel-shade-hadoop3-uber`   | Hadoop Client | 3.1.4 |
 | `seatunnel-shade-jackson`        | Jackson | 2.15.4 |
 | `seatunnel-shade-guava`          | Guava | 27.0-jre |
@@ -120,9 +120,14 @@ mvn -B -DskipTests -Drat.skip=true -pl seatunnel-shade-janino clean deploy
 
 ### Tagging
 
+After pushing the release branch, tag the commit used to build the source
+archive. Check that the published tag resolves to that commit before opening
+the vote. For 3.0.1, run these commands from the release commit.
+
 ```bash
-git tag v3.0.0.fix
-git push origin v3.0.0.fix
+git tag -a v3.0.1 -m "Apache SeaTunnel Shade 3.0.1"
+git push origin refs/tags/v3.0.1
+git ls-remote origin 'refs/tags/v3.0.1^{}'
 ```
 
 ## Adding a new module
@@ -227,41 +232,35 @@ If the `seatunnel.shade.version` itself changes (e.g. `3.0.0` → `3.0.1`), it a
 
 ### 2. Declare the shaded dependency
 
-All shade modules are centrally managed in SeaTunnel's root `<dependencyManagement>`. For new shade modules, add a corresponding entry following the standard pattern:
+Declare shaded dependencies under `<dependencyManagement>` in the consuming
+project's root `pom.xml`. This example uses the resolved Maven versions for
+Shade 3.0.1.
 
 ```xml
-<dependency>
-    <groupId>org.apache.seatunnel</groupId>
-    <artifactId>seatunnel-shade-<name></artifactId>
-    <version>${seatunnel.shade.<name>.version}-${seatunnel.shade.version}</version>
-</dependency>
-```
-
-Existing entries (all 13 modules):
-
-```xml
-<dependency>
-    <groupId>org.apache.seatunnel</groupId>
-    <artifactId>seatunnel-shade-hadoop3-uber</artifactId>
-    <version>${seatunnel.shade.hadoop.version}-${seatunnel.shade.version}</version>
-</dependency>
-<dependency>
-    <groupId>org.apache.seatunnel</groupId>
-    <artifactId>seatunnel-shade-guava</artifactId>
-    <version>${seatunnel.shade.guava.version}-${seatunnel.shade.version}</version>
-</dependency>
-<dependency>
-    <groupId>org.apache.seatunnel</groupId>
-    <artifactId>seatunnel-shade-jackson</artifactId>
-    <version>${seatunnel.shade.jackson.version}-${seatunnel.shade.version}</version>
-</dependency>
-<dependency>
-    <groupId>org.apache.seatunnel</groupId>
-    <artifactId>seatunnel-shade-calcite</artifactId>
-    <version>${seatunnel.shade.calcite.version}-${seatunnel.shade.version}</version>
-</dependency>
-<!-- ... remaining modules follow the same pattern ... -->
-</dependency>
+<dependencyManagement>
+    <dependencies>
+        <dependency>
+            <groupId>org.apache.seatunnel</groupId>
+            <artifactId>seatunnel-shade-hadoop3-uber</artifactId>
+            <version>3.1.4-3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.seatunnel</groupId>
+            <artifactId>seatunnel-shade-guava</artifactId>
+            <version>27.0-jre-3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.seatunnel</groupId>
+            <artifactId>seatunnel-shade-jackson</artifactId>
+            <version>2.15.4-3.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.seatunnel</groupId>
+            <artifactId>seatunnel-shade-calcite</artifactId>
+            <version>1.38.0-3.0.1</version>
+        </dependency>
+    </dependencies>
+</dependencyManagement>
 ```
 
 ### Summary checklist
