@@ -30,6 +30,11 @@
     <version>${hadoop3.version}-${seatunnel.shade.version}</version>
     <name>SeaTunnel : Shade : Hadoop3 Uber</name>
 
+    <properties>
+        <hadoop.azure.version>3.2.0</hadoop.azure.version>
+        <seatunnel.shade.version>3.0.1</seatunnel.shade.version>
+    </properties>
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -46,6 +51,21 @@
             <groupId>org.apache.hadoop</groupId>
             <artifactId>hadoop-client</artifactId>
             <version>${hadoop3.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hadoop</groupId>
+            <artifactId>hadoop-azure</artifactId>
+            <version>${hadoop.azure.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.microsoft.azure</groupId>
+                    <artifactId>azure-storage</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.eclipse.jetty</groupId>
+                    <artifactId>jetty-util-ajax</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
     </dependencies>
@@ -68,6 +88,12 @@
                             <shadedArtifactAttached>false</shadedArtifactAttached>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
                             <filters>
+                                <filter>
+                                    <artifact>org.apache.hadoop:hadoop-azure</artifact>
+                                    <includes>
+                                        <include>org/apache/hadoop/fs/azurebfs/**</include>
+                                    </includes>
+                                </filter>
                                 <filter>
                                     <artifact>*:*</artifact>
                                     <excludes>
@@ -101,6 +127,9 @@
                                     <shadedPattern>${seatunnel.shade.package}.hadoop.com.fasterxml.jackson</shadedPattern>
                                 </relocation>
                             </relocations>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer" />
+                            </transformers>
                         </configuration>
                     </execution>
                 </executions>
